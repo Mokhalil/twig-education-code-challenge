@@ -26,9 +26,13 @@ var groupBy = function (array, groupNumber) {
         }
     }
     else {
+        //if the array.length is not dividable by the number of groups, work out the largest equal
         var chunkSize = Math.floor((array.length - 1) / Math.max((groupNumber - 1), 2));
         for (var i = 0; i < groupNumber; i++) {
-            result.push(array.slice(0, chunkSize));
+            if (i === groupNumber - 1)
+                result.push(array.slice(0));
+            else
+                result.push(array.slice(0, chunkSize));
             array.splice(0, chunkSize);
         }
         console.log(result);

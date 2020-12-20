@@ -27,7 +27,7 @@ describe("groupBy utility", function () {
         var size = 5;
         expect(function () { return groupBy_1.groupBy(input, size); }).toThrow();
     });
-    it("when array.length is divisable by number of groups", function () {
+    it("should return equally sized chunks if array length is diviable by the required number of chunks", function () {
         var input = [1, 2, 3, 4, 5, 6];
         var numberOfGroups = 3;
         var sizeOfChunck = Math.ceil(input.length / numberOfGroups);
@@ -41,7 +41,10 @@ describe("groupBy utility", function () {
             expect(item.length).toEqual(sizeOfChunck);
         });
     });
-    it("when array.length is not divisable by number of groups", function () {
+    it("should return N number of groups with N-1 groups are equal in size , if array length is not" +
+        " diviable" +
+        " by the required number" +
+        " of chunks", function () {
         var input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         var numberOfGroups = 3;
         var output = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]];
