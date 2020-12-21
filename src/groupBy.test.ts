@@ -1,5 +1,12 @@
 import {groupBy} from "./groupBy";
 
+const testCases = [
+    [[1, 2, 3, 4], 2, [[1, 2], [3, 4]]], //Equal-sized chuncks
+    [[1, 2, 3, 4, 5], 3, [[1, 2], [3, 4], [5]]], //With remainder group
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 5, [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10, 11]]],//With remainder group
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 4, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13]]]//With remainder group
+]
+
 describe("groupBy utility", () => {
     it("should throw an exception when array parametr is empty or its length is zero", () => {
         const input: number[] = [];
@@ -33,7 +40,7 @@ describe("groupBy utility", () => {
 
         const input: number[] = [1, 2, 3, 5];
         const size = 5;
-        expect(()=>groupBy(input, size)).toThrow();
+        expect(() => groupBy(input, size)).toThrow();
     });
 
 
@@ -41,7 +48,6 @@ describe("groupBy utility", () => {
         const input: number[] = [1, 2, 3, 4, 5, 6];
         const numberOfGroups = 3;
         const sizeOfChunck = Math.ceil(input.length / numberOfGroups);
-        const remainder = input.length % sizeOfChunck;
         const expectedOutput = [[1, 2], [3, 4], [5, 6]]
         const actualOutput = groupBy(input, numberOfGroups);
 
@@ -58,9 +64,9 @@ describe("groupBy utility", () => {
         " diviable" +
         " by the required number" +
         " of chunks", () => {
-        const input: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const input: number[] = [1, 2, 3, 4, 5];
         const numberOfGroups = 3;
-        const output = [[1, 2, 3 ,4], [5, 6,7,8], [9,10]];
+        const output = [[1, 2], [3, 4], [5]];
 
         const actualOutput = groupBy(input, numberOfGroups);
 
@@ -68,4 +74,12 @@ describe("groupBy utility", () => {
         expect(actualOutput.length).toEqual(numberOfGroups);
         expect(actualOutput).toEqual(output);
     });
+
+    test.each(testCases)(
+        'given %j and %p as arguments, returns %j', (collection: any, n: any, expected: any) => {
+            const actual = groupBy(collection, n);
+            expect(actual).toBeTruthy()
+            expect(actual).toEqual(expected);
+        }
+    )
 });

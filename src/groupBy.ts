@@ -1,38 +1,43 @@
-export const groupBy = (array: any[], groupNumber: number) => {
+function Split(numberOfGroups: number, result: any[], collection: any[], size: number) {
+    //Split the collection into chunks
+    for (let i = 0; i < numberOfGroups; i++) {
+        //Push each chunk into the Result and then remove from the collection
+        result.push(collection.slice(0, size));
+        collection.splice(0, size);
+    }
+}
+
+export const groupBy = (collection: any[], numberOfGroups: number) => {
 
     //function guards
-    if (!array) throw new Error("Array parameter cannot be null or undefined");
-    if (array.length == 0) throw new Error("Array parameter cannot be empty");
-    if (groupNumber === 0 || groupNumber < 0) throw new Error('groupNumber cannot be 0 or negative number');
-    if (groupNumber > array.length) throw new Error('groupNumber cannot be more than array length');
+    if (!collection) throw new Error("Array parameter cannot be null or undefined");
+    if (collection.length == 0) throw new Error("Array parameter cannot be empty");
+    if (numberOfGroups === 0 || numberOfGroups < 0) throw new Error('numberOfGroups cannot be 0 or negative number');
+    if (numberOfGroups > collection.length) throw new Error('numberOfGroups cannot be more than collection length');
 
 
-    //Get group size and sizeOfLastGroup
-    const remainder = array.length % groupNumber;
+    //Workout if the Array can be split evenly into N number of groups. Remainder have to be zero.
+    const remainder = collection.length % numberOfGroups;
 
-    //initialze the resulted array
-    let result = [];
+    //Initialize the resulted collection
+    let result : any[] = [];
 
-    // Start splitting the array
+    // If remainder is zero, then all groups will be split evenly
     if (remainder === 0) {
-        const chunkSize = array.length / groupNumber
-        //Split array into equal-size chunks if array length is dividable by number of groups
-        for (let i = 0; i < groupNumber; i++) {
-            //Add the chunk to the result and remove it from original array and loop
-            result.push(array.slice(0, chunkSize));
-            array.splice(0, chunkSize);
-        }
+        //Get size of group
+        const size = collection.length / numberOfGroups
+        Split(numberOfGroups, result, collection, size);
     } else {
-        //if the array.length is not dividable by the number of groups, work out the largest equal
-        const chunkSize = Math.floor((array.length - 1) / Math.max((groupNumber - 1), 2))
-        for (let i = 0; i < groupNumber; i++) {
-            if (i === groupNumber - 1)
-                result.push(array.slice(0));
-            else
-                result.push(array.slice(0, chunkSize));
-            array.splice(0, chunkSize);
-        }
-        console.log(result);
+        /*
+        If collection cannot be split evenly, then the last group will contain the remainder.
+        That means that instead of dividing the collection on N - which represent the number of groups-, we will
+         divide on N-1 instead. That's becuase 1 group will contain remainder.
+         */
+        const size = Math.floor((collection.length-1) / Math.max((numberOfGroups - 1), 2))
+        Split(numberOfGroups-1, result, collection, size);
+        //add the remainder to the result
+        result.push(collection.slice(0));
+
     }
     return result;
 };
