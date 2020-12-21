@@ -2,12 +2,19 @@ import {groupBy} from "./groupBy";
 
 const testCases = [
     [[1, 2, 3, 4], 2, [[1, 2], [3, 4]]], //Equal-sized chuncks
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]]], //Equal-sized chuncks
     [[1, 2, 3, 4, 5], 3, [[1, 2], [3, 4], [5]]], //With remainder group
     [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 5, [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10, 11]]],//With remainder group
-    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 4, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13]]]//With remainder group
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 4, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13]]],//With
+    // remainder group
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 5, [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13]]]//With
+    // remainder group
+
 ]
 
 describe("groupBy utility", () => {
+
+    //test function guards
     it("should throw an exception when array parametr is empty or its length is zero", () => {
         const input: number[] = [];
         const numberOfGroups = 10;
@@ -42,8 +49,7 @@ describe("groupBy utility", () => {
         const size = 5;
         expect(() => groupBy(input, size)).toThrow();
     });
-
-
+    
     it("should return equally sized chunks if array length is diviable by the required number of chunks", () => {
         const input: number[] = [1, 2, 3, 4, 5, 6];
         const numberOfGroups = 3;
