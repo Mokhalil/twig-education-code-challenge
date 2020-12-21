@@ -1,15 +1,15 @@
 # twig-education-code-challenge
 This repository contains the solution of the code challenge sent from Twig Education. The solution consists of :
-1. function/module file : groupBy.ts that contains the code with comments
-2. unit tests file : groupBy.test.ts that includes all the test cases for the function
-3. client file : client.ts that uses the groupBy function.
+1. groupBy.ts :  This is the function code file.
+2. groupBy.test.ts : Includes unit-tests and specs of the function.
+3. client.ts : Includes code that uses the function. 
 
 # Understanding the function
 To understand what the function does, please go through the unit tests file as it contains examples for inputs and expected results.
 
-#Using the solution
+# Using the solution
 1. Clone the code to your machine.
 2. Install dependencies : npm install 
-3. build the solution : npm run build
-4. run the client : npm start
-5. if you would like to quickly test the function : npm test  
+3. Build the solution : npm run build
+4. Run the client : npm start
+5. If you would like to quickly test the function : npm test  
