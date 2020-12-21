@@ -5,7 +5,7 @@ This reposiroty contains the solution of the code challenge sent from Twig Educa
 3. client file : runner.ts that uses the groupBy function.
 
 # Understanding the function
-To understand what the function does, please go through the unit tests file.
+To understand what the function does, please go through the unit tests file as it contains examples for inputs and expected results.
 
 #Using the solution
 1. Clone the code to your machine.
