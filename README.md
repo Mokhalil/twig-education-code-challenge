@@ -1,8 +1,8 @@
 # twig-education-code-challenge
-This reposiroty contains the solution of the code challenge sent from Twig Education. The solution consists of :
+This repository contains the solution of the code challenge sent from Twig Education. The solution consists of :
 1. function/module file : groupBy.ts that contains the code with comments
 2. unit tests file : groupBy.test.ts that includes all the test cases for the function
-3. client file : runner.ts that uses the groupBy function.
+3. client file : client.ts that uses the groupBy function.
 
 # Understanding the function
 To understand what the function does, please go through the unit tests file as it contains examples for inputs and expected results.
